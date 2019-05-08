@@ -1,5 +1,19 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <v-container>
+    <v-layout wrap>
+      <v-flex xs12 class="title text-xs-center">
+        About
+      </v-flex>
+      <v-flex xs12>
+        <v-divider class="my-3"></v-divider>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
+
+<script>
+export default {};
+</script>
+
+
+
