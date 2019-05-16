@@ -8,10 +8,18 @@
         <v-divider class="my-3"></v-divider>
       </v-flex>
       <v-layout wrap> 
-        <v-flex xs10 v-for="(item, index) in tests" :key="index">
-          <v-card>
-              <v-card-title>{{ item.name }}</v-card-title>
-              <v-card-title>{{ item.author }}</v-card-title>
+        <v-flex xs4 v-for="(item, index) in tests" :key="index">
+          <v-card>          
+            <div class="display-1 py-2 text-xs-center">{{ item.name }}</div>
+            <v-flex d-flex justify-space-between class="text-xs-center">
+              <span>{{ item.author }}</span>
+              <span>Groups: {{ item.group.toString() }}</span>
+            </v-flex>
+            <v-card-actions>
+              <v-flex d-flex justify-center>
+                <v-btn @click="startTest(index)" class="mx-5 primary">Try</v-btn>
+              </v-flex>
+            </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>
@@ -29,24 +37,8 @@ export default {
           questions: [
             {
               text: "What is your name",
-              answers: [
-                {
-                  text: "Egor",
-                  answer: true
-                },
-                {
-                  text: "Ygor",
-                  answer: false
-                },
-                {
-                  text: "Agor",
-                  answer: false
-                },
-                {
-                  text: "Igor",
-                  answer: false
-                }
-              ]
+              variants: ["Egor","Ygor","Agor","Igor"],
+              answers: [ true, false, false, false]
             }
           ],
           group: ["is-71", "is-72", "is-73"],
@@ -55,6 +47,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    startTest(index) {
+      this.$router.push({ path: `test/${index}`});
+    }
   }
 };
 </script>

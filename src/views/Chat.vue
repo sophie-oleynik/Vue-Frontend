@@ -7,21 +7,7 @@
       <v-flex xs12>
         <v-divider class="my-3"></v-divider>
       </v-flex>
-      <v-flex xs12 class="white">
-          <v-layout column class="chat" id="chat">
-              <v-flex v-for="(message, index) in messages" :key="index" class="ma-2" :class="messageStyle(message) ? 'userMessage' : 'memberMessage'">
-                  <v-card width="300" class="green white--text">
-                      <v-card-title class="py-0">{{ message.userName }}</v-card-title>
-                      <v-card-text class="py-0">
-                          {{ message.text }}
-                      </v-card-text>
-                  </v-card>
-                  <span class="grey--text">data</span>
-              </v-flex>
-              
-          </v-layout>
-      </v-flex>
-      <v-flex d-flex class="my-3 px-3">
+      <v-flex d-flex class="mt-3 px-3">
         <v-flex xs11>
           <v-text-field
             label="Solo"
@@ -33,6 +19,20 @@
         <v-flex xs1 class="mx-4 " d-flex align-top>
           <v-btn class="primary mt-0"  @click="sendMessage" large>Send</v-btn>
         </v-flex>
+      </v-flex>
+      <v-flex xs12 class="white ml-3 chat">
+          <v-layout column  id="chat">
+              <v-flex v-for="(message, index) in chatReverse" :key="index" class="ma-2" :class="messageStyle(message) ? 'userMessage' : 'memberMessage'">
+                  <v-card width="300" class="green white--text">
+                      <v-card-title class="py-0">{{ message.userName }}</v-card-title>
+                      <v-card-text class="py-0">
+                          {{ message.text }}
+                      </v-card-text>
+                  </v-card>
+                  <span class="grey--text">data</span>
+              </v-flex>
+              
+          </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -112,6 +112,11 @@ export default {
       newMessage: ""
     };
   },
+  computed: {
+    chatReverse() {
+      return this.messages.reverse();
+    }
+  },
   methods: {
     messageStyle(item) {
       if (this.$store.state.user.email === item.userEmail) {
@@ -130,13 +135,6 @@ export default {
       this.messages.push(newMessage);
       this.newMessage = "";
     }
-  },
-  created() {
-    this.$vuetify.goTo("v-layout", {
-      duration: 100,
-      offset: 1000,
-      easing: "linear"
-    });
   }
 };
 </script>
@@ -151,6 +149,9 @@ export default {
 .chat {
   overflow-y: scroll;
   height: 75vh;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px
 }
 </style>
 

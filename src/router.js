@@ -6,6 +6,7 @@ import Chat from './views/Chat';
 import Dashboard from './views/Dashboard';
 import Tests from './views/Tests.vue';
 import About from './views/About';
+import Test from './views/Test';
 
 Vue.use(Router);
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/tests',
       name: 'tests',
       component: Tests
+    },
+    {
+      path: '/test/:id',
+      name: 'test',
+      component: Test
     },
     {
       path: '/about',
