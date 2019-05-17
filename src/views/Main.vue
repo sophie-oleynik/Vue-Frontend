@@ -1,7 +1,8 @@
 <template>
   <v-app class="grey lighten-2">
+    <app-navbar></app-navbar>
     <v-layout>
-      <v-flex xs12>
+      <v-flex xs12 md10 offset-md2 class="pl-5">
         <transition name="slide" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -12,25 +13,12 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import Navbar from "../components/Navbar";
 
 export default {
-  name: "App",
-  data() {
-    return {
-      //
-    };
+  components: {
+    appNavbar: Navbar
   },
-  methods: {
-    ...mapActions([
-          'loadUsers', 'loadTests', 'loadPosts'
-      ]),
-  },
-  created () {
-    this.loadUsers();
-    this.loadTests();
-    this.loadPosts();
-  }
 };
 </script>
 

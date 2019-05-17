@@ -2,7 +2,7 @@
   <v-container>
     <v-layout wrap>
       <v-flex xs12 class="title text-xs-center">
-        Chat
+        Чат
       </v-flex>
       <v-flex xs12>
         <v-divider class="my-3"></v-divider>
@@ -16,8 +16,8 @@
             solo
           ></v-text-field>
         </v-flex>
-        <v-flex xs1 class="mx-4 " d-flex align-top>
-          <v-btn class="primary mt-0"  @click="sendMessage" large>Send</v-btn>
+        <v-flex xs2 d-flex align-top>
+          <v-btn class="primary mt-0"  @click="sendMessage" large>Відправити</v-btn>
         </v-flex>
       </v-flex>
       <v-flex xs12 class="white ml-3 chat">
@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     messageStyle(item) {
-      if (this.$store.state.user.email === item.userEmail) {
+      if (this.$store.state.user.user.email === item.userEmail) {
         return true;
       } else {
         return false;
