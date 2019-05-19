@@ -1,11 +1,11 @@
 <template>
-  <v-flex d-flex xs4 offset-xs4 class="white mt-5" align-center justify-center>
+  <v-flex d-flex xs4 offset-xs4 class="mt-5 pa-4" align-center justify-center>
     <v-form>
-      <v-layout justify-space-around wrap>
-        <v-flex class="grey darken-3 title py-2 white--text text-xs-center">
+      <v-layout justify-space-around wrap class="white mt-5 border">
+        <v-flex class="primary title py-3 white--text border text-xs-center">
           Реєстрація
         </v-flex>
-        <v-flex xs12>
+        <v-flex xs12 class="mt-4">
               <v-flex xs10 d-flex class="mx-5">
                 <v-text-field placeholder="Iм`я" v-model="user.name" :error-messages="nameMessage"></v-text-field>
               </v-flex>
@@ -19,12 +19,14 @@
                 <v-text-field label="Subject" v-if="user.teacher" v-model="user.subject"></v-text-field>
               </v-flex>
               <v-flex xs10 d-flex class="mx-5">
-                  <v-radio-group v-model="user.teacher">
+                  <v-radio-group row  v-model="user.teacher">
                     <v-radio
+                        class="mr-4"
                         label="Студент"
                         :value="false"
                     ></v-radio>
                     <v-radio
+                        class="ml-5 pl-3"
                         label="Викладач"
                         :value="true"
                     ></v-radio>
@@ -102,4 +104,7 @@ export default {
 </script>
 
 <style>
+.border {
+  border-radius: 20px;
+}
 </style>

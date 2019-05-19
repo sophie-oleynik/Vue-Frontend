@@ -1,18 +1,17 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
-import Auth from './views/Auth.vue';
+import Auth from './views/Auth/Auth.vue';
 import Chat from './views/Chat';
 import Dashboard from './views/Dashboard';
-import Tests from './views/Tests.vue';
-import About from './views/About';
-import Test from './views/Test';
+import Tests from './views/Test/Tests.vue';
+import Test from './views/Test/Test';
 import Main from './views/Main';
-import Reg from './views/Reg';
-import Posts from './views/Posts';
-import Post from './views/Post';
-import NewPost from './views/NewPost';
-import NewTest from './views/NewTest';
+import Reg from './views/Auth/Reg';
+import Posts from './views/Post/Posts';
+import Post from './views/Post/Post';
+import NewPost from './views/Post/NewPost';
+import NewTest from './views/Test/NewTest';
 import Inbox from './views/Inbox';
 
 import {ifAuthenticated} from '@/services/middleware';
@@ -39,11 +38,11 @@ const router = new Router({
       beforeEnter: ifAuthenticated ,
       component: Main,
       children: [
-        // {
-        //   path: '',
-        //   name: 'home',
-        //   component: Home
-        // },
+        {
+          path: '',
+          name: 'home',
+          component: Home
+        },
         {
           path: 'chat',
           name: 'chat',

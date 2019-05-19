@@ -2,7 +2,16 @@ import axios from "axios";
 
 const state = {
     user: null,
-    users: null,
+    users: [
+        {
+            email: 'egortkachenco@gmail.com',
+            password: '123'
+        },
+        {
+            email: "123",
+            password: "123"
+        }
+    ],
 };
 
 const mutations = {
@@ -28,16 +37,22 @@ const actions = {
         }).catch(() => {})
     },
     loginUser({commit}, data) {
-        const user = this.state.user.users.filter((item) => {  if(item.email == data.email && item.password == data.passWord) { return item} });
-        if (user.length > 0) {
-            commit('LOG_USER', user[0]);
+        if(this.state.user.users) {
+            const user = this.state.user.users.filter((item) => {  if(item.email == data.email && item.password == data.passWord) { return item} });
+            if (user.length > 0) {
+                commit('LOG_USER', user[0]);
+                return true;
+            } else {
+                return false;
+            }
+        } else { 
+            return false;
         }
     },
     createUser({commit}, newUser) {
-        console.log(newUser);
-        axios.post("http://localhost:8082/user", { data: newUser })
-        .then(response => { commit('LOG_USER', newUser) })
-        .catch(() => {})
+        axios.post("http://localhost:8082/user", newUser ) //!!!
+        .then(response => { commit('LOG_USER', newUser); })
+        .catch(() => {});
     },
     logOutUser({commit}) {
         commit('LOG_OUT');
@@ -53,7 +68,9 @@ const actions = {
 
 const getters = {
     isTeacher(state) {
-        return state.user.teacher;
+        if (state.user) {
+            return state.user.teacher;
+        } else return false;    
     },
     isAuthentificated(state) {
         if(state.user) {

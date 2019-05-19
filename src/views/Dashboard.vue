@@ -2,7 +2,7 @@
   <v-container>
     <v-layout wrap>
       <v-flex xs12 class="title text-xs-center">
-        Dashboard
+        Розклад
       </v-flex>
       <v-flex xs12>
         <v-divider class="my-3"></v-divider>
@@ -44,7 +44,27 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+
+export default {
+  data () {
+    return {
+      
+    }
+  },
+  methods: {
+    loadShedule() {
+      this.shedule = this.getShedule;
+      
+    }
+  },
+  computed: {
+  },
+  created() {
+    
+    console.log(this.$store.state.shedule.shedule);
+  }
+};
 </script>
 
 

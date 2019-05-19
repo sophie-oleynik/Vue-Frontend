@@ -38,19 +38,20 @@ export default {
   data() {
     return {
       userLinks: [
-        //{ title: "Головна", icon: "account_box", route: "/" },
-        { title: "Пошта", icon: "email", route: "/inbox" },
-        //{ title: "Розклад", icon: "dashboard", route: "/dashboard" },
+        { title: "Головна", icon: "account_box", route: "/" },
+        { title: "Розклад", icon: "dashboard", route: "/dashboard" },
         { title: "Статі", icon: "dashboard", route: "/posts" },
         { title: "Тести", icon: "event", route: "/tests" },
-        { title: "Чат", icon: "perm_identity", route: "/chat" },
+        { title: "Чат", icon: "email", route: "/chat" },
       ],
       teacherLinks: [
-        //{ title: "Головна", icon: "account_box", route: "/" },
-        { title: "Пошта", icon: "email", route: "/inbox" },
+        { title: "Головна", icon: "account_box", route: "/" },
+        { title: "Розклад", icon: "dashboard", route: "/dashboard" },        
         { title: "Тести", icon: "event", route: "/tests" },
-        { title: "Статі", icon: "dashboard", route: "/posts" }
-      ],
+        { title: "Статі", icon: "dashboard", route: "/posts" },
+        { title: "add post", icon: "email", route: "/newpost" },
+        { title: "add test", icon: "email", route: "/newtest" },
+  ],
       drawer: false
     };
   },

@@ -1,5 +1,5 @@
 <template>
-  <v-app class="grey lighten-2">
+  <v-app :style="{ background: color }">
     <v-layout>
       <v-flex xs12>
         <transition name="slide" mode="out-in">
@@ -23,18 +23,29 @@ export default {
   },
   methods: {
     ...mapActions([
-          'loadUsers', 'loadTests', 'loadPosts'
+          'loadUsers', 'loadTests', 'loadPosts', 'loadSchedule'
       ]),
+  },
+  computed: {
+    color () {
+      if (this.$router.currentRoute.name == "login" || this.$router.currentRoute.name == "registration") {
+        return '#CCFF90';
+      } else {
+        return 'grey';
+      }
+    }
   },
   created () {
     this.loadUsers();
     this.loadTests();
     this.loadPosts();
+    this.loadSchedule();
   }
 };
 </script>
 
 <style scoped>
+
 .slide-enter-active {
   animation: slide-in 200ms ease-out forwards;
 }
