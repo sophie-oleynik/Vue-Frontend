@@ -41,7 +41,15 @@ export default {
     }
   },
   created () {
-    this.marks = this.$store.state.user.user.marks;
+    if (!this.$store.state.user.user.teacher) {
+      this.marks = this.$store.state.user.user.marks;
+    } else {
+      for (let i = 0; i < this.$store.state.user.users.length; i++) {
+        if (this.$store.state.user.users[i].marks.length >= 1) {
+          this.marks = this.marks.concat(this.$store.state.user.users[i].marks);
+        }
+      }
+    }
   }
 };
 </script>

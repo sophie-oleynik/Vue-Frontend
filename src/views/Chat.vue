@@ -29,7 +29,6 @@
                           {{ message.text }}
                       </v-card-text>
                   </v-card>
-                  <span class="grey--text">data</span>
               </v-flex>
               
           </v-layout>
