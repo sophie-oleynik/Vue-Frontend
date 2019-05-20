@@ -25,7 +25,7 @@ const mutations = {
       state.user = null;
   },
   'ADD_TEST_RESULT'(state, testResult) {
-    state.user.test.push(testResult);
+    state.user.marks.push(testResult);
   }
 };
 
@@ -58,8 +58,9 @@ const actions = {
         commit('LOG_OUT');
     },
     addTestResult({commit}, testResult) {
-        const user = this.state.user;
-        user.test.push(testResult);
+        const user = this.state.user.user;
+        user.marks.push(testResult);
+        console.log(user);
         axios.post("http://localhost:8082/user", user)
             .then(() => { commit('ADD_TEST_RESULT', testResult); })
             .catch(() => { console.log('error')});

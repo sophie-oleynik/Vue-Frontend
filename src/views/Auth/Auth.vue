@@ -62,7 +62,7 @@ export default {
         if( this.valid() ) {
           const auth = await this.loginUser({ email: this.email, passWord: this.password });
           if(auth) {
-            this.$router.push({ name: 'inbox' })    
+            this.$router.push({ name: 'home' })    
           } else {
             this.emailMessage = "Такого користувача не існує";
           }

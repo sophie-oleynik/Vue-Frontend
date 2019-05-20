@@ -19,6 +19,14 @@
                 <v-text-field label="Subject" v-if="user.teacher" v-model="user.subject"></v-text-field>
               </v-flex>
               <v-flex xs10 d-flex class="mx-5">
+                <v-select
+                  v-if="!user.teacher"
+                  v-model="user.groupName"
+                  :items="groups"
+                  label="Група"
+                ></v-select>
+              </v-flex>
+              <v-flex xs10 d-flex class="mx-5">
                   <v-radio-group row  v-model="user.teacher">
                     <v-radio
                         class="mr-4"
@@ -51,10 +59,12 @@ export default {
             "name": '',
             "email": '',
             "password": '',
+            "groupName": '',
             "teacher": false,
             "chat": [],
             "marks": [],
         },
+        groups: ['іс-72'],
         nameMessage: '',
         emailMessage: '',
         passwordMessage: '',
@@ -64,10 +74,10 @@ export default {
       ...mapActions([
           'createUser'
       ]),
-      addUser () {
+      async addUser () {
         if( this.valid ) {
-          this.createUser(this.user);
-          this.$router.push({ name: 'inbox'})
+          await this.createUser(this.user);
+          this.$router.push({ name: 'home'})
         } 
           
         

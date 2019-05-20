@@ -2,21 +2,21 @@
   <v-container>
     <v-layout wrap>
       <v-flex xs12 class="title text-xs-center">
-        Tests
+        Тести
       </v-flex>
       <v-flex xs12>
         <v-divider class="my-3"></v-divider>
       </v-flex>
       <v-layout wrap> 
         <v-flex xs4 v-for="(item, index) in getTests" :key="index">
-          <v-card>          
+          <v-card class="ma-2">          
             <div class="display-1 py-2 text-xs-center">{{ item.title }}</div>
             <v-flex d-flex justify-space-between class="text-xs-center">
               <span>Оцінка за тест: {{ item.maxMark }}</span>
             </v-flex>
             <v-card-actions>
               <v-flex d-flex justify-center>
-                <v-btn @click="startTest(index)" class="mx-5 primary">Try</v-btn>
+                <v-btn @click="startTest(item.id)" class="mx-5 primary">Try</v-btn>
               </v-flex>
             </v-card-actions>
           </v-card>
@@ -32,9 +32,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   data() {
     return {
-      tests: [
-        
-      ]
+      tests: []
     };
   },
   methods: {

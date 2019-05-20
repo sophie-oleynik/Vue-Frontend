@@ -4,6 +4,7 @@ import user from './modules/user'
 import test from './modules/test'
 import post from './modules/post'
 import shedule from './modules/schedule'
+import chat from './modules/chat'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     user,
     test,
     post,
-    shedule
+    shedule,
+    chat
   }
 })

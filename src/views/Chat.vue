@@ -2,7 +2,7 @@
   <v-container>
     <v-layout wrap>
       <v-flex xs12 class="title text-xs-center">
-        Чат
+        Чат групи {{ groupName }}
       </v-flex>
       <v-flex xs12>
         <v-divider class="my-3"></v-divider>
@@ -11,7 +11,7 @@
         <v-flex xs11>
           <v-text-field
             label="Solo"
-            v-model="newMessage"
+            v-model="newMessageText"
             placeholder="Message..."
             solo
           ></v-text-field>
@@ -24,7 +24,7 @@
           <v-layout column  id="chat">
               <v-flex v-for="(message, index) in chatReverse" :key="index" class="ma-2" :class="messageStyle(message) ? 'userMessage' : 'memberMessage'">
                   <v-card width="300" class="green white--text">
-                      <v-card-title class="py-0">{{ message.userName }}</v-card-title>
+                      <v-card-title class="py-0">{{ message.fromName }}</v-card-title>
                       <v-card-text class="py-0">
                           {{ message.text }}
                       </v-card-text>
@@ -39,77 +39,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
-      messages: [
-        {
-          userName: "Egor",
-          userEmail: "egortkachenco@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Arina",
-          userEmail: "asdasd",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Easdas",
-          userEmail: "eg@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Egor",
-          userEmail: "egortkachenco@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Arina",
-          userEmail: "asdasd",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Easdas",
-          userEmail: "eg@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Egor",
-          userEmail: "egortkachenco@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Arina",
-          userEmail: "asdasd",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Easdas",
-          userEmail: "eg@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Egor",
-          userEmail: "egortkachenco@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Arina",
-          userEmail: "asdasd",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Easdas",
-          userEmail: "eg@gmail.com",
-          text: "Some message to my group"
-        },
-        {
-          userName: "Egor",
-          userEmail: "egortkachenco@gmail.com",
-          text: "Some message to my group"
-        }
-      ],
-      newMessage: ""
+      messages: [],
+      newMessageText: '',
+      groupName: '',
+      userName: ''
     };
   },
   computed: {
@@ -118,23 +56,23 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['loadChat']),
     messageStyle(item) {
-      if (this.$store.state.user.user.email === item.userEmail) {
+      if (this.$store.state.user.user.name === item.fromName) {
         return true;
       } else {
         return false;
       }
     },
     sendMessage() {
-      const newMessage = {
-        userName: "Egor",
-        userEmail: "egortkachenco@gmail.com",
-        text: ""
-      };
-      newMessage.text = this.newMessage;
-      this.messages.push(newMessage);
-      this.newMessage = "";
+      this.messages.push({ fromName: this.userName, text: this.newMessageText });
+      this.newMessageText = "";
     }
+  },
+  created () {
+    this.userName = this.$store.state.user.user.name;
+    this.groupName = this.$store.state.user.user.groupName;
+    this.loadChat();
   }
 };
 </script>

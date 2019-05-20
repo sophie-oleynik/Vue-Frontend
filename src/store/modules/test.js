@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 
 const state = {
     tests: null
@@ -12,23 +12,16 @@ const mutations = {
 
 const actions = {
     loadTests({commit}) {
-        Axios.get("http://localhost:8082/test")
+        axios.get("http://localhost:8082/test")
         .then(response => {
             console.log(response.data)
             commit('LOAD_TESTS', response.data);
         }).catch(() => {console.log('error');})
     },
     createTest({commit}, test) {
-        console.log(test);
-        Axios.post("http://localhost:8082/test")
+        axios.post("http://localhost:8082/test", test)
             .then(response => { return response.data })
             .catch(() => {console.log('error')})
-    },
-    getTestById(id) {
-        const test = null;
-        Axios.get(`http://localhost:8082/test/${id}`)
-            .then (response => { this.test = response.data })
-            .catch(() => { console.log('Error')});
     }
 };
 
