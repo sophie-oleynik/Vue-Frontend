@@ -62,7 +62,7 @@ const actions = {
         user.marks.push(testResult);
         console.log(user);
         axios.post("http://localhost:8082/user", user)
-            .then(() => { commit('ADD_TEST_RESULT', testResult); })
+            .then(() => { })
             .catch(() => { console.log('error')});
     }
 };

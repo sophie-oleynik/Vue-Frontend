@@ -12,7 +12,7 @@
           <v-flex xs4 v-for="(mark, index) in marks" :key="index">
             <v-card class="ma-3">
               <v-card-title class="text-xs-center subheading">Назва: {{ mark.title }}</v-card-title>
-              <v-card-text class="blue">Результат: {{ mark.studentMark }}/{{ mark.maxMark }}</v-card-text>
+              <v-card-text :class="resultMark(mark.studentMark, mark.maxMark)">Результат: {{ mark.studentMark }}/{{ mark.maxMark }}</v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
@@ -27,6 +27,17 @@ export default {
   data () {
     return {
       marks: []
+    }
+  },
+  methods: {
+    resultMark(student, mark) {
+      if (mark != 0 && student / mark >= 0.75) {
+        return 'green lighten-1';
+      } else if (student / mark < 0.75 && student / mark >= 0.25) {
+        return 'yellow lighten-2'
+      } else {
+        return 'red lighten-1'
+      }
     }
   },
   created () {
