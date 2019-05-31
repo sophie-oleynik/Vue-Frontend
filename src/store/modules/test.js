@@ -11,17 +11,19 @@ const mutations = {
 };
 
 const actions = {
-    loadTests({commit}) {
-        axios.get("http://localhost:8082/test")
+    async loadTests({commit}) {
+        await axios.get(`http://10.10.10.219:3000/tests`)
         .then(response => {
-            console.log(response.data)
             commit('LOAD_TESTS', response.data);
-        }).catch(() => {console.log('error');})
+        }).catch(() => {})
     },
-    createTest({commit}, test) {
-        axios.post("http://localhost:8082/test", test)
-            .then(response => { return response.data })
-            .catch(() => {console.log('error')})
+    async createTest({commit}, test) {
+        await axios.post("http://10.10.10.219:3000/tests", test)
+            .then(response => {
+                this.loadTests();
+                return response.data
+            })
+            .catch(() => {})
     }
 };
 

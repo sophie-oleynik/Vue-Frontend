@@ -29,7 +29,7 @@ export default {
   computed: {
     color () {
       if (this.$router.currentRoute.name == "login" || this.$router.currentRoute.name == "registration") {
-        return '#CCFF90';
+        return '#ffffff';
       } else {
         return 'grey';
       }
@@ -39,7 +39,6 @@ export default {
     this.loadUsers();
     this.loadTests();
     this.loadPosts();
-    this.loadSchedule();
   }
 };
 </script>

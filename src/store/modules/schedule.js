@@ -6,24 +6,25 @@ const state = {
 };
 
 const mutations = {
-  'LOAD_SHEDULE'(state, shedule) {
+  'LOAD_SCHEDULE'(state, schedule) {
       state.schedule = schedule;
-      console.log(shedule)
   }
 };
 
 const actions = {
     loadSchedule({commit}) {
-        axios.get(`https://api.rozklad.org.ua/v2/groups/${this.state.shedule.group}/lessons`)
+        console.log('');
+        axios.get(`https://api.rozklad.org.ua/v2/groups/ic-72/lessons`)
         .then(response => {
-            commit('LOAD_SHEDULE', response.data);
-        }).catch(() => {console.log('Shedule problem');})
+            console.log(response.data);
+            commit('LOAD_SCHEDULE', response.data);
+        }).catch(() => {console.log('Schedule problem');})
     }
 };
 
 const getters = {
-    getShedule (state) {
-        return state.shedule;
+    getSchedule (state) {
+        return state.schedule;
     }
 };
 

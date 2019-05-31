@@ -2,16 +2,7 @@ import axios from "axios";
 
 const state = {
     user: null,
-    users: [
-        {
-            email: 'egortkachenco@gmail.com',
-            password: '123'
-        },
-        {
-            email: "123",
-            password: "123"
-        }
-    ],
+    users: null,
 };
 
 const mutations = {
@@ -30,9 +21,10 @@ const mutations = {
 };
 
 const actions = {
-    loadUsers({commit}) {
-        axios.get("http://localhost:8082/user")
+    async loadUsers({commit}) {
+        await axios.get('http://10.10.10.219:3000/users')
         .then(response => {
+            console.log(response.data)
             commit('LOAD_USERS', response.data);
         }).catch(() => {})
     },
@@ -49,28 +41,37 @@ const actions = {
             return false;
         }
     },
-    createUser({commit}, newUser) {
-        axios.post("http://localhost:8082/user", newUser ) //!!!
-        .then(response => { commit('LOG_USER', newUser); })
+    async createUser({commit}, newUser) {
+        await axios.post('http://10.10.10.219:3000/users', newUser )
+        .then(res => {
+            commit('LOG_USER', res.data);
+        })
         .catch(() => {});
     },
     logOutUser({commit}) {
         commit('LOG_OUT');
     },
-    addTestResult({commit}, testResult) {
+    async addTestResult({commit}, testResult) {
         const user = this.state.user.user;
         user.marks.push(testResult);
-        console.log(user);
-        axios.post("http://localhost:8082/user", user)
+        const url = 'http://10.10.10.219:3000/users/' + user._id;
+        await axios.put( url, user)
             .then(() => { })
-            .catch(() => { console.log('error')});
+            .catch(() => { });
+    },
+    async addMessage({commit}, user) {
+        console.log(user);
+        const url = 'http://10.10.10.219:3000/users/' + user._id;
+        await axios.put( url, user)
+            .then(() => { })
+            .catch(() => { });
     }
 };
 
 const getters = {
     isTeacher(state) {
         if (state.user) {
-            return state.user.teacher;
+            return state.user.isTeacher;
         } else return false;    
     },
     isAuthentificated(state) {
@@ -79,6 +80,9 @@ const getters = {
         } else {
             return false;
         }
+    },
+    getUsers(state) {
+        return state.users;
     }
 };
 

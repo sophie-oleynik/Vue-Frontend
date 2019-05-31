@@ -34,7 +34,6 @@ const router = new Router({
     },
     {
       path: '/',
-      name: 'main',
       beforeEnter: ifAuthenticated ,
       component: Main,
       children: [

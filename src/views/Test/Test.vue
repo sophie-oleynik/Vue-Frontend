@@ -71,7 +71,7 @@ export default {
         const id = this.$route.params.id;
         const tests = this.getTests;
         for (let i = 0; i < tests.length; i++) {
-            if (tests[i].id == id ) {
+            if (tests[i]._id == id ) {
                 this.test = tests[i];
                 break;
             }

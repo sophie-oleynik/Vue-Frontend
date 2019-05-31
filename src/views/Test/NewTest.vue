@@ -1,47 +1,57 @@
 <template>
     <v-container>
-    <v-layout wrap>
-      <v-flex xs12 class="title text-xs-center">
-        Новий Тест
-      </v-flex>
-      <v-flex xs12>
-        <v-divider class="my-3"></v-divider>
-      </v-flex>
-      <v-flex xs12 d-flex class="mt-3 px-3">
-        <v-card class="pa-2">
-            <v-layout wrap>
-                <v-flex xs8 d-flex class="mx-5">
-                    <v-text-field label="Назва тесту" v-model="newTest.title" :error-messages="titleMessage"></v-text-field>
-                </v-flex>
-                <v-flex xs2 d-flex class="mx-4">
-                    <v-text-field label="Оцінка за тест" type="number" v-model="newTest.maxMark" :error-messages="markMessage"></v-text-field>
-                </v-flex>
-                <v-flex xs12 class="mx-5">
-                  <v-flex xs12>
-                    <v-text-field label="Питання ..." :error-messages="questionMessage" v-model="newQuestion.text"></v-text-field>
-                  </v-flex>
-                  <v-layout wrap>
-                    <v-flex xs12 d-flex justify-center>
-                      <v-radio-group v-model="newQuestion.answers">
-                        <v-flex xs12 d-flex wrap v-for="(question, index) in 4" :key="index">
-                          <v-radio
-                              :value="index" 
-                          ></v-radio>
-                          <v-text-field v-model="newQuestion.questions[index]" :label="`Варіант відповіді ${index + 1}`"></v-text-field>
-                        </v-flex>
-                      </v-radio-group>
+        <v-layout wrap>
+            <v-flex xs12 d-flex class="mt-5">
+                <v-card class="pb-3">
+                    <v-flex xs12>
+                        <v-card class="mx-3 green absolute-title">
+                            <v-layout>
+                                <v-flex xs3  class="my-3 ml-3 white--text">
+                                    <p class="my-0">Новий Тест</p>
+                                    <p class="my-0 grey--text text--lighten-3 caption">Створіть та опублікуйте новий тест</p>
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
                     </v-flex>
-                    <v-flex d-flex>
-                      <v-btn @click="addQuestion">Додати питання</v-btn>
-                      <v-btn @click="sendTest">Завершити тест</v-btn>               
-                    </v-flex> 
-                  </v-layout>
-                </v-flex>
-            </v-layout>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+                    <v-layout wrap class="mt-5">
+                        <v-flex xs12 d-flex class="mt-3 px-3">
+                            <v-card class="pa-2" flat>
+                                <v-layout wrap>
+                                    <v-flex xs8 d-flex class="mx-5">
+                                        <v-text-field label="Назва тесту" v-model="newTest.title" :error-messages="titleMessage"></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs2 d-flex class="mx-4">
+                                        <v-text-field label="Оцінка за тест" type="number" v-model="newTest.maxMark" :error-messages="markMessage"></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs12 class="mx-5">
+                                        <v-flex xs12>
+                                            <v-text-field label="Питання ..." :error-messages="questionMessage" v-model="newQuestion.text"></v-text-field>
+                                        </v-flex>
+                                        <v-layout wrap>
+                                            <v-flex xs12 d-flex justify-center>
+                                                <v-radio-group v-model="newQuestion.answers">
+                                                    <v-flex xs12 d-flex wrap v-for="(question, index) in 4" :key="index">
+                                                        <v-radio
+                                                                :value="index"
+                                                        ></v-radio>
+                                                        <v-text-field v-model="newQuestion.questions[index]" :label="`Варіант відповіді ${index + 1}`"></v-text-field>
+                                                    </v-flex>
+                                                </v-radio-group>
+                                            </v-flex>
+                                            <v-flex d-flex>
+                                                <v-btn @click="addQuestion" class="indigo white--text">Додати питання</v-btn>
+                                                <v-btn @click="sendTest" class="green white--text">Завершити тест</v-btn>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-flex>
+                                </v-layout>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
@@ -76,9 +86,8 @@ export default {
     sendTest() {
       if (this.validTest()) {
         this.addQuestion();
-        console.log(this.newTest);
         this.createTest(this.newTest);
-        this.loadTests();
+        this.$store.state.test.tests.push(this.newTest);
         this.$router.push({ name: 'tests'});
       }
     },
@@ -141,5 +150,11 @@ export default {
 </script>
 
 <style scoped>
+    .absolute-title {
+        position: absolute;
+        top: -25px;
+        left: 0;
+        width: 97%;
+    }
 </style>
 

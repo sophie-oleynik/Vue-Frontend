@@ -1,5 +1,5 @@
 <template>
-  <v-app class="grey lighten-2">
+  <v-app class="white grey lighten-4">
     <app-navbar></app-navbar>
     <v-layout>
       <v-flex xs12 md10 offset-md2 class="pl-5">
@@ -17,7 +17,7 @@ import Navbar from "../components/Navbar";
 
 export default {
   components: {
-    appNavbar: Navbar
+    appNavbar: Navbar,
   },
 };
 </script>
